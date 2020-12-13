@@ -7,6 +7,7 @@ import {
   StyleSheet,
   StatusBar,
   TouchableOpacity,
+  Button,
 } from 'react-native';
 
 import api from './services/api';
@@ -28,7 +29,7 @@ export default function App() {
 
   async function handleAddProject() {
     const response = await api.post('projects', {
-      title: `New Project ${Date.now()}`,
+      title: `Project #${Date.now()}`,
       owner: 'Andre Peixoto',
     });
 
@@ -50,7 +51,8 @@ export default function App() {
         ))}
       </View> */}
 
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.title}>Projects List</Text>
         <FlatList
           data={projects}
           keyExtractor={(project) => project.id}
@@ -65,7 +67,7 @@ export default function App() {
           onPress={handleAddProject}>
           <Text style={styles.buttonText}>Add Project</Text>
         </TouchableOpacity>
-      </View>
+      </SafeAreaView>
     </>
   );
 }
@@ -73,7 +75,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#9e9e9e',
+    backgroundColor: '#000',
     // justifyContent: 'center',
     // alignItems: 'center',
   },
@@ -81,13 +83,17 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 32,
     fontWeight: 'bold',
+    paddingVertical: 20,
+    textAlign: 'center',
   },
   project: {
     color: '#fff',
     fontSize: 20,
+    paddingVertical: 5,
+    textAlign: 'center',
   },
   button: {
-    backgroundColor: '#fff',
+    backgroundColor: '#fefe',
     margin: 20,
     height: 50,
     borderRadius: 4,
